@@ -12,7 +12,7 @@
 
                 <x-jet-section-border />
             @endif
-
+{{-- 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.update-password-form')
@@ -39,7 +39,7 @@
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.delete-user-form')
                 </div>
-            @endif
+            @endif --}}
         </div>
     </div>
 </x-app-layout>
