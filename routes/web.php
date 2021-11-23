@@ -20,11 +20,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('items', ItemController::class)
-    ->only(['index', 'show']);
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 
 Route::resource('items', ItemController::class)
-    ->middleware(['auth'])
+    ->only(['index', 'show','create', 'store', 'edit', 'update', 'destroy']);
+
+Route::resource('items', ItemController::class)
+    ->middleware(['auth:sanctum', 'verified'])
     ->only(['create', 'store', 'edit', 'update', 'destroy']);
 
 

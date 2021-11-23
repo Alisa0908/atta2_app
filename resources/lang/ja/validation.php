@@ -127,5 +127,10 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
-    'attributes'           => [],
+    'attributes'           => [
+        'lost_desc' => '落ちていた場所',
+        'feature' => '特徴',
+        'category_id' => 'カテゴリー',
+        'image' => '写真',
+    ],
 ];

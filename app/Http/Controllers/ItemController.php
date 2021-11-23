@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Category;
+use App\Models\Attachment;
 use Illuminate\Http\Request;
+use App\Http\Requests\ItemRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -13,9 +16,20 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('items.index');
+        $category = $request->category;
+        $lost_desc = $request->lost_desc;
+        $feature = $request->feature;
+
+        $params = $request->query();
+        $items = Item::search($params)
+            ->with(['place', 'category'])->paginate(10);
+        $items->appends(compact('feature', 'lost_desc', 'category'));
+
+        $categories = Category::all();
+
+        return view('items.index', compact('items', 'categories'));
     }
 
     /**
@@ -32,12 +46,38 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Item  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        //
+        $item = new Item($request->all());
+        $item->user_id = $request->user()->id;
+        $file = $request->file;
+
+        try {
+            // 登録
+            $item->save();
+            $path = Storage::putFile('items', $file);
+
+            // Attachmentモデルの情報を用意
+            $attachment = new Attachment([
+                'item_id' => $item->id,
+                'org_name' => $file->getClientOriginalName(),
+                'name' => basename($path)
+            ]);
+            // Attachment保存
+            $attachment->save();
+
+
+        } catch (\Exception $e) {
+            return back()->withInput()
+                ->withErrors('保存に失敗しました');
+        }
+
+        return redirect()
+            ->route('items.show', $item)
+            ->with('notice', '情報を登録しました');
     }
 
     /**
@@ -65,11 +105,11 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Item  $request
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(ItemRequest $request, Item $item)
     {
         //
     }
