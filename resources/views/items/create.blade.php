@@ -4,7 +4,7 @@
 
         <x-validation-errors :errors="$errors" />
 
-        <form action="{{ route('items.store') }}" method="POST" class="rounded pt-3 pb-8 mb-4">
+        <form action="{{ route('items.store') }}" enctype="multipart/form-data" method="POST" class="rounded pt-3 pb-8 mb-4">
             @csrf
             <div class="mb-4">
                 <label class="block mb-2" for="category_id">

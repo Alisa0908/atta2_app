@@ -26,8 +26,8 @@ class ItemRequest extends FormRequest
         return [
             'lost_desc' => 'required|string|max:50',
             'feature' => 'string',
-            'category_id' => 'required|exists:category,id',
-            'file' => 'string|file|image',
+            'category_id' => 'required|exists:categories,id',
+            'file' => 'string',
         ];
     }
 }
