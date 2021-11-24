@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [ItemController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('/welcome', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::resource('items', ItemController::class)
+    ->only(['index', 'show','create', 'store', 'edit', 'update', 'destroy']);
+
+Route::resource('items', ItemController::class)
+    ->middleware(['auth:sanctum', 'verified'])
+    ->only(['create', 'store', 'edit', 'update', 'destroy']);
+
+
+
