@@ -40,6 +40,9 @@ class Item extends Model
 
     public function getImageUrlAttribute()
     {
+        if (config('filesystems.default') == 'gcs'){
+            return Storage::temporaryUrl($this->image_path, now()->addMinutes(5));
+        } 
         return Storage::url($this->image_path);
     }
 
