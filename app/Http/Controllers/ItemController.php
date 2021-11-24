@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Item::class, 'item');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -117,10 +121,6 @@ class ItemController extends Controller
      */
     public function update(ItemRequest $request, Item $item)
     {
-        // if (Auth::user()->cannot('update', $item)) {
-        //     return redirect()->route('items.index')
-        //     ->withErrors('自分の求人情報以外は更新できません');
-        // }
         $item->fill($request->all());
 
 
@@ -148,7 +148,6 @@ class ItemController extends Controller
         //     return redirect()->route('items.index', $item)
         //     ->withErrors('自分の投稿した情報以外は削除できません');
         // }
-
         try {
             $item->delete();
         } catch (\Exception $e) {

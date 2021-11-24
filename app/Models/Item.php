@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class Item extends Model
 {
@@ -57,6 +58,16 @@ class Item extends Model
         if (!empty($params['feature'])) {
             $query->where('feature', $params['feature']);
         }
+        return $query;
+    }
+
+    public function scopeMyItem(Builder $query)
+    {
+        $query->where(
+            'user_id',
+            Auth::user()->id
+        );
+
         return $query;
     }
 
