@@ -25,7 +25,7 @@ class ItemController extends Controller
 
         $params = $request->query();
         $items = Item::search($params)
-            ->with(['place', 'category'])->paginate(10);
+            ->with(['user', 'category'])->paginate(10);
         $items->appends(compact('feature', 'lost_desc', 'category'));
 
         $categories = Category::all();
@@ -92,7 +92,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view('items.show', compact('item'));
     }
 
     /**
@@ -103,7 +103,8 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        $categories = Category::all();
+        return view('items.edit', compact('item', 'categories'));
     }
 
     /**

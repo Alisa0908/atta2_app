@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 
 class Item extends Model
 {
@@ -16,9 +17,9 @@ class Item extends Model
         'lost_desc',
     ];
 
-    public function place()
+    public function user()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(User::class);
     }
 
     public function category()
@@ -28,7 +29,17 @@ class Item extends Model
 
     public function attachment()
     {
-        return $this->belongsTo(Attachment::class);
+        return $this->hasOne(Attachment::class);
+    }
+
+    public function getImagePathAttribute()
+    {
+        return 'items/' . $this->attachment->name;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return Storage::url($this->image_path);
     }
 
     public function scopeSearch(Builder $query, $params)
