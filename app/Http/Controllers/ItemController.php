@@ -8,6 +8,7 @@ use App\Models\Attachment;
 use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
 {
@@ -55,6 +56,9 @@ class ItemController extends Controller
         $item->user_id = $request->user()->id;
         $file = $request->file;
 
+
+        DB::beginTransaction();
+
         try {
             // 登録
             $item->save();
@@ -68,11 +72,11 @@ class ItemController extends Controller
             ]);
             // Attachment保存
             $attachment->save();
-
-
+            DB::commit();
         } catch (\Exception $e) {
             return back()->withInput()
                 ->withErrors('保存に失敗しました');
+            DB::rollback();
         }
 
         return redirect()

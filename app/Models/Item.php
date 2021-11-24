@@ -14,7 +14,6 @@ class Item extends Model
         'category_id',
         'feature',
         'lost_desc',
-        'image',
     ];
 
     public function place()

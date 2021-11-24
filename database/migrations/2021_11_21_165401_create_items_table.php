@@ -25,7 +25,6 @@ class CreateItemsTable extends Migration
                 ->cascadeOnDelete();
             $table->string('feature');
             $table->string('lost_desc');
-            $table->string('image');
             $table->timestamps();
         });
     }

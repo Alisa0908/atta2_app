@@ -13,6 +13,6 @@ class AttachmentSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }
