@@ -56,12 +56,12 @@
 
         <div class="flex flex-col sm:flex-row items-center sm:justify-end text-center my-4">
             <a href="{{ route('items.edit', $item) }}"
-                class="bg-gradient-to-r from-yellow-300 to-yellow-400 hover:bg-gradient-to-l hover:from-blue-500 hover:to-indigo-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 w-full sm:w-32 sm:mr-2 mb-2 sm:mb-0">編集</a>
+                class="bg-gradient-to-r from-yellow-300 to-yellow-400 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 w-full sm:w-32 sm:mr-2 mb-2 sm:mb-0">編集</a>
             <form action="{{ route('items.destroy', $item) }}" method="post" class="w-full sm:w-32">
                 @csrf
                 @method('DELETE')
                 <input type="submit" value="削除" onclick="if(!confirm('削除しますか？')){return false};"
-                    class="bg-gradient-to-r from-yellow-500 to-yellow-600 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 w-full sm:w-32">
+                    class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500 w-full sm:w-32">
             </form>
         </div>
     </div>

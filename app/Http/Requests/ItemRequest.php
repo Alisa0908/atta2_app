@@ -23,11 +23,20 @@ class ItemRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $route = $this->route()->getName();
+
+        $rule = [
             'lost_desc' => 'required|string|max:50',
             'feature' => 'string|max:500',
             'category_id' => 'required|exists:categories,id',
-            'file' => 'required|file|image|mimes:jpeg,png',
         ];
+
+        if ($route === 'items.store') {
+            $rule['file'] = 'required|file|image|mimes:jpeg,png';
+        } else {
+            $rule['file'] = 'file|image|mimes:jpeg,png';
+        }
+
+        return $rule;
     }
 }

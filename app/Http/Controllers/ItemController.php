@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -116,7 +117,23 @@ class ItemController extends Controller
      */
     public function update(ItemRequest $request, Item $item)
     {
-        //
+        // if (Auth::user()->cannot('update', $item)) {
+        //     return redirect()->route('items.index')
+        //     ->withErrors('自分の求人情報以外は更新できません');
+        // }
+        $item->fill($request->all());
+
+
+        try {
+            // 登録
+            $item->save();
+        } catch (\Exception $e) {
+            return back()->withInput()
+                ->withErrors('登録処理でエラーが発生しました');
+        }
+
+        return redirect()->route('items.show', $item)
+        ->with('notice', '登録しました');
     }
 
     /**
@@ -127,6 +144,19 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        // if (Auth::guard(PlaceConst::GUARD)->user()->cannot('delete', $item)) {
+        //     return redirect()->route('items.index', $item)
+        //     ->withErrors('自分の投稿した情報以外は削除できません');
+        // }
+
+        try {
+            $item->delete();
+        } catch (\Exception $e) {
+            return back()->withInput()
+                ->withErrors('削除処理でエラーが発生しました');
+        }
+
+        return redirect()->route('items.index')
+        ->with('notice', '落とし物情報を削除しました');
     }
 }
