@@ -1,0 +1,54 @@
+### index
+GET /api/items HTTP/1.1
+Host: localhost
+Accept: application/json
+
+### show
+GET /api/items/1 HTTP/1.1
+Host: localhost
+Accept: application/json
+
+### store
+POST /api/items
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "lost_desc": "八丁堀",
+    "category_id": 1,
+    "file": 25000,
+}
+
+### destroy
+DELETE /api/items/2 HTTP/1.1
+Host: localhost
+Accept: application/json
+
+### register
+POST /api/register
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "name": "bbb",
+    "email": "taro@example.com",
+    "password": "password",
+    "tel": "0000000",
+    "address": "千葉"
+}
+
+### login
+POST /api/login
+Host: localhost
+Accept: application/json
+content-type: application/json
+
+{
+    "name": "bbb",
+    "email": "taro@example.com",
+    "password": "password",
+    "tel": "0000000",
+    "address": "千葉"
+}

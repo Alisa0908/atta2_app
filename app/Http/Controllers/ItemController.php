@@ -144,10 +144,6 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        // if (Auth::guard(PlaceConst::GUARD)->user()->cannot('delete', $item)) {
-        //     return redirect()->route('items.index', $item)
-        //     ->withErrors('自分の投稿した情報以外は削除できません');
-        // }
         try {
             $item->delete();
         } catch (\Exception $e) {
