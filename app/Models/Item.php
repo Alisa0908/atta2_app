@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class Item extends Model
 {
@@ -16,9 +18,9 @@ class Item extends Model
         'lost_desc',
     ];
 
-    public function place()
+    public function user()
     {
-        return $this->belongsTo(Place::class);
+        return $this->belongsTo(User::class);
     }
 
     public function category()
@@ -28,7 +30,20 @@ class Item extends Model
 
     public function attachment()
     {
-        return $this->belongsTo(Attachment::class);
+        return $this->hasOne(Attachment::class);
+    }
+
+    public function getImagePathAttribute()
+    {
+        return 'items/' . $this->attachment->name;
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if (config('filesystems.default') == 'gcs'){
+            return Storage::temporaryUrl($this->image_path, now()->addMinutes(5));
+        } 
+        return Storage::url($this->image_path);
     }
 
     public function scopeSearch(Builder $query, $params)
@@ -46,6 +61,16 @@ class Item extends Model
         if (!empty($params['feature'])) {
             $query->where('feature', $params['feature']);
         }
+        return $query;
+    }
+
+    public function scopeMyItem(Builder $query)
+    {
+        $query->where(
+            'user_id',
+            Auth::user()->id
+        );
+
         return $query;
     }
 

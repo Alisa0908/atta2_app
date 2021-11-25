@@ -4,8 +4,9 @@
 
         <x-validation-errors :errors="$errors" />
 
-        <form action="{{ route('items.store') }}" enctype="multipart/form-data" method="POST" class="rounded pt-3 pb-8 mb-4">
+        <form action="{{ route('items.update', $item) }}" enctype="multipart/form-data" method="POST" class="rounded pt-3 pb-8 mb-4">
             @csrf
+            @method('PATCH')
             <div class="mb-4">
                 <label class="block mb-2" for="category_id">
                     カテゴリー
@@ -14,7 +15,7 @@
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-yellow-500 w-full py-2 px-3">
                     <option disabled selected value="">選択してください</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" @if ($category->id == old('category_id')) selected @endif>{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" @if ($category->id == old('category_id', $item->category_id)) selected @endif>{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -24,7 +25,7 @@
                 </label>
                 <input type="text" name="feature"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-yellow-500 w-full py-2 px-3"
-                    required placeholder="カンマ区切りで記入" value="{{ old('feature') }}">
+                    required placeholder="カンマ区切りで記入" value="{{ old('feature', $item->feature) }}">
             </div>
             <div class="mb-4">
                 <label class="block mb-2" for="lost_desc">
@@ -32,17 +33,18 @@
                 </label>
                 <input type="text" name="lost_desc"
                     class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-yellow-500 w-full py-2 px-3"
-                    required placeholder="近くの施設名など" value="{{ old('lost_desc') }}">
+                    required placeholder="近くの施設名など" value="{{ old('lost_desc', $item->lost_desc) }}">
             </div>
             <div class="mb-4">
-                <label class="block mb-2" for="file">
+                <label class="block mb-2 inline-block" for="file">
                     ファイルを選択してください
                 </label>
                 <input type="file" name="file"
-                    class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-yellow-500 w-full py-2 px-3"
-                    value="{{ old('file') }}">
+                    class="shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-yellow-500 w-full py-2 px-3 inline-block"
+                    value="{{ old('file', $item->file) }}">
+                <img src="{{ $item->image_url }}" alt="" class="h-10 w-10 rounded-full object-cover mr-3 inline-block">
             </div>
-            <input type="submit" value="登録"
+            <input type="submit" value="更新"
                 class="w-full flex justify-center bg-yellow-300 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-2 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">
         </form>
     </div>

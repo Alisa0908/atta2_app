@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Item::class, 'item');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +30,7 @@ class ItemController extends Controller
 
         $params = $request->query();
         $items = Item::search($params)
-            ->with(['place', 'category'])->paginate(10);
+            ->with(['user', 'category'])->paginate(10);
         $items->appends(compact('feature', 'lost_desc', 'category'));
 
         $categories = Category::all();
@@ -92,7 +97,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view('items.show', compact('item'));
     }
 
     /**
@@ -103,7 +108,8 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        $categories = Category::all();
+        return view('items.edit', compact('item', 'categories'));
     }
 
     /**
@@ -115,7 +121,19 @@ class ItemController extends Controller
      */
     public function update(ItemRequest $request, Item $item)
     {
-        //
+        $item->fill($request->all());
+
+
+        try {
+            // 登録
+            $item->save();
+        } catch (\Exception $e) {
+            return back()->withInput()
+                ->withErrors('登録処理でエラーが発生しました');
+        }
+
+        return redirect()->route('items.show', $item)
+        ->with('notice', '登録しました');
     }
 
     /**
@@ -126,6 +144,14 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        try {
+            $item->delete();
+        } catch (\Exception $e) {
+            return back()->withInput()
+                ->withErrors('削除処理でエラーが発生しました');
+        }
+
+        return redirect()->route('items.index')
+        ->with('notice', '落とし物情報を削除しました');
     }
 }

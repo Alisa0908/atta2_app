@@ -67,6 +67,12 @@
                                 <th
                                     class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                     電話番号</th>
+                                @auth
+                                    <th
+                                        class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                        詳細</th>
+                                @endauth
+
                             </tr>
                         </thead>
 
@@ -88,13 +94,20 @@
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                         <div class="text-sm leading-5 text-gray-500">{{ $item->lost_desc }}</div>
                                     </td>
-                                    
+
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-500">{{ $item->place->name }}</div>
+                                        <div class="text-sm leading-5 text-gray-500">{{ $item->user->name }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                        <div class="text-sm leading-5 text-gray-500">{{ $item->place->tel }}</div>
+                                        <div class="text-sm leading-5 text-gray-500">{{ $item->user->tel }}</div>
                                     </td>
+                                    @auth
+                                        <td
+                                            class="px-6 py-4 leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                            <a href="{{ route('items.show', $item) }}"
+                                                class="px-1 py-1 text-sm text-yellow-400 bg-yellow-200 rounded-full">詳</a>
+                                        </td>
+                                    @endauth
 
                                 </tr>
                             @endforeach

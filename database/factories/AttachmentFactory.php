@@ -16,21 +16,16 @@ class AttachmentFactory extends Factory
      */
     public function definition()
     {
-        $items = Item::all();
-
-        foreach ($items as $item) {
-            $width = 500;
-            $height = 500;
-            $file = $this->faker->image(null, $width, $height);
-            $path = Storage::putFile('items', $file);
-            File::delete($file);
+        $width = 100;
+        $height = 100;
+        $file = $this->faker->image(null, $width, $height);
+        $path = Storage::putFile('items', $file);
+        File::delete($file);
     
-            return [
-                'item_id' => $item->id,
-                'org_name' => basename($file),
-                'name' => basename($path),
-            ];
-        }
+        return [
+            'org_name' => basename($file),
+            'name' => basename($path),
+        ];
 
     }
 }
