@@ -10,6 +10,7 @@
                     </a>
                 </div>
                 <!-- Navigation Links -->
+                @auth
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('items.create') }}">
                         {{ __('登録') }}
@@ -20,6 +21,7 @@
                         {{ __('一覧') }}
                     </x-jet-nav-link>
                 </div>
+                @endauth
 
             </div>
             @auth

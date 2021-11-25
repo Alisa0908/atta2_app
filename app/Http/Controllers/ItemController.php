@@ -59,15 +59,16 @@ class ItemController extends Controller
     {
         $item = new Item($request->all());
         $item->user_id = $request->user()->id;
+        //create画面でname="file"になってる
         $file = $request->file;
-
-
+        
         DB::beginTransaction();
-
+        
         try {
             // 登録
             $item->save();
             $path = Storage::putFile('items', $file);
+            dd($path);
 
             // Attachmentモデルの情報を用意
             $attachment = new Attachment([
