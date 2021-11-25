@@ -15,7 +15,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/welcome', function () {
+    return view('welcome');
+})->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -25,9 +31,6 @@ Route::get('/dashboard', [UserController::class, 'dashboard'])
     ->middleware(['auth:sanctum', 'verified'])
     ->name('dashboard');
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('welcome');
 
 Route::resource('items', ItemController::class)
     ->only(['index']);
