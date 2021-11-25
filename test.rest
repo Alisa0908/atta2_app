@@ -8,37 +8,6 @@ GET /api/items/1 HTTP/1.1
 Host: localhost
 Accept: application/json
 
-### store
-POST /api/items
-Host: localhost
-Accept: application/json
-Content-Type: multipart/form-data; boundary=storeform
-
---storeform
-Content-Disposition: form-data; name="category_id"
-# Content-Type: TEXT
-
-1
-
---storeform
-Content-Disposition: form-data; name="lost_desc"
-# Content-Type: TEXT
-
-八丁堀
-
---storeform
-Content-Disposition: form-data; name="file"; filename="file.png"
-Content-Type: image/png
-Content-Length: 4323
-
-< ./file.png
---storeform
-
-### destroy
-DELETE /api/items/2 HTTP/1.1
-Host: localhost
-Accept: application/json
-
 ### register
 POST /api/register
 Host: localhost
@@ -66,3 +35,39 @@ content-type: application/json
     "tel": "0000000",
     "address": "千葉"
 }
+
+### store
+POST /api/items
+Host: localhost
+Accept: application/json
+Content-Type: multipart/form-data; boundary=storeform
+
+--storeform
+Content-Disposition: form-data; name="category_id";
+Content-Type: TEXT
+
+1
+
+--storeform
+Content-Disposition: form-data; name="lost_desc";
+Content-Type: TEXT
+
+"八丁堀"
+
+--storeform
+Content-Disposition: form-data; name="feature";
+Content-Type: TEXT
+
+"赤い"
+
+--storeform
+Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg02.jpeg";
+Content-Type: image/jpeg
+
+< /Users/alisa/egg02.jpeg
+--storeform
+
+### destroy
+DELETE /api/items/5 HTTP/1.1
+Host: localhost
+Accept: application/json

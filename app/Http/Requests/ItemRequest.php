@@ -29,6 +29,7 @@ class ItemRequest extends FormRequest
             'lost_desc' => 'required|string|max:50',
             'feature' => 'string|max:500',
             'category_id' => 'required|exists:categories,id',
+            // 'file' => 'file|image|mimes:jpeg,png'
         ];
 
         if ($route === 'items.store') {

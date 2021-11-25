@@ -46,24 +46,24 @@ class ItemController extends Controller
         DB::beginTransaction();
 
         try {
-            // 登録
             $item->save();
             $path = Storage::putFile('items', $file);
 
-            // Attachmentモデルの情報を用意
             $attachment = new Attachment([
                 'item_id' => $item->id,
                 'org_name' => $file->getClientOriginalName(),
                 'name' => basename($path)
             ]);
-            // Attachment保存
             $attachment->save();
             DB::commit();
         } catch (\Exception $e) {
+            // return $e->getMessage();
             return back()->withInput()
                 ->withErrors('保存に失敗しました');
             DB::rollback();
         }
+
+        return $item;
 
     }
 
