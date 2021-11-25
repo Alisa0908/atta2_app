@@ -17,7 +17,8 @@ content-type: application/json
 {
     "lost_desc": "八丁堀",
     "category_id": 1,
-    "file": 25000,
+    "feature" : "赤い",
+    "file": "https://storage.googleapis.com/atta2-app.appspot.com/items/BRUwqIbsEwfM3tTjzYQWtgUwRxVXtbnI5J1CYw3A.png?GoogleAccessId=firebase-adminsdk-vfjcd%40atta2-app.iam.gserviceaccount.com&Expires=1637805013&Signature=IQ%2FkqGRuZRgeDSS%2FWPiVlpNcwFxxGGMNr1TvzUoAQREkVU%2BmokhnaJsoyuWAVx2yZ862ujPmQ%2BQyOFrxjnRt4FgV1ffUkdmH4wxaGQjrMFoO3pUcyJZfg75TlPBQXadkurmkBW2O5fYAjl2NW44eRP9bbWgo6OvkrgfE%2B3agErgq65aUA3kiSvVFi9UibKq0RjyuKGs3vFmHpFAIsa6LAPy1WvtPJixNF5sUetg1jFGQN9HiGeIgrqES8qdETOgtGmGUrr4YWTcFmdd571XDRDssG6Mnhy%2BaWCWdZDgr1yYSucTdUycEV1yFYwDFWB2jO0Ng%2BOblcuvE46IYQRKbUA%3D%3D",
 }
 
 ### destroy
