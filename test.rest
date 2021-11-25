@@ -12,13 +12,27 @@ Accept: application/json
 POST /api/items
 Host: localhost
 Accept: application/json
-content-type: application/json
+Content-Type: multipart/form-data; boundary=storeform
 
-{
-    "lost_desc": "八丁堀",
-    "category_id": 1,
-    "file": 25000,
-}
+--storeform
+Content-Disposition: form-data; name="category_id"
+# Content-Type: TEXT
+
+1
+
+--storeform
+Content-Disposition: form-data; name="lost_desc"
+# Content-Type: TEXT
+
+八丁堀
+
+--storeform
+Content-Disposition: form-data; name="file"; filename="file.png"
+Content-Type: image/png
+Content-Length: 4323
+
+< ./file.png
+--storeform
 
 ### destroy
 DELETE /api/items/2 HTTP/1.1
