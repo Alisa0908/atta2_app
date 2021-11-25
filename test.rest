@@ -46,25 +46,56 @@ Content-Type: multipart/form-data; boundary=storeform
 Content-Disposition: form-data; name="category_id";
 Content-Type: TEXT
 
-1
+3
 
 --storeform
 Content-Disposition: form-data; name="lost_desc";
 Content-Type: TEXT
 
-"八丁堀"
+バスの中
 
 --storeform
 Content-Disposition: form-data; name="feature";
 Content-Type: TEXT
 
-"赤い"
+灰色
 
 --storeform
-Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg02.jpeg";
+Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg01.jpeg";
 Content-Type: image/jpeg
 
-< /Users/alisa/egg02.jpeg
+< /Users/alisa/egg01.jpeg
+--storeform
+
+### update
+PUT /api/items/1
+Host: localhost
+Accept: application/json
+Content-Type: multipart/form-data; boundary=storeform
+
+--storeform
+Content-Disposition: form-data; name="category_id";
+Content-Type: TEXT
+
+3
+
+--storeform
+Content-Disposition: form-data; name="lost_desc";
+Content-Type: TEXT
+
+バスの中
+
+--storeform
+Content-Disposition: form-data; name="feature";
+Content-Type: TEXT
+
+灰色
+
+--storeform
+Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg01.jpeg";
+Content-Type: image/jpeg
+
+< /Users/alisa/egg01.jpeg
 --storeform
 
 ### destroy

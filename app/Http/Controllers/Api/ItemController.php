@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Attachment;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -40,7 +41,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request)
     {
         $item = new Item($request->all());
-        $item->user_id = $request->user()->id;
+        $item->user_id = 1;
         $file = $request->file;
 
         DB::beginTransaction();
@@ -54,16 +55,17 @@ class ItemController extends Controller
                 'org_name' => $file->getClientOriginalName(),
                 'name' => basename($path)
             ]);
+
             $attachment->save();
             DB::commit();
         } catch (\Exception $e) {
-            // return $e->getMessage();
-            return back()->withInput()
-                ->withErrors('保存に失敗しました');
+            return $e->getMessage();
             DB::rollback();
         }
 
-        return $item;
+        $data = [$attachment, $item];
+
+        return $data;
 
     }
 
