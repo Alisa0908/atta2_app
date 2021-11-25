@@ -44,6 +44,7 @@ class Item extends Model
             return Storage::temporaryUrl($this->image_path, now()->addMinutes(5));
         } 
         return Storage::url($this->image_path);
+        dd(Storage::url($this->image_path));
     }
 
     public function scopeSearch(Builder $query, $params)

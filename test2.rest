@@ -1,0 +1,24 @@
+### store
+POST /api/items
+Host: localhost
+Accept: application/json
+Content-Type: multipart/form-data; boundary=storeform
+
+--storeform
+Content-Disposition: form-data; name="category_id";
+Content-Type: TEXT
+
+1
+
+--storeform
+Content-Disposition: form-data; name="lost_desc";
+Content-Type: TEXT
+
+"八丁堀"
+
+--storeform
+Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg02.png"
+Content-Type: image/png
+
+/Users/alisa/egg02.png
+--storeform

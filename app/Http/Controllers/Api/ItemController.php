@@ -43,7 +43,6 @@ class ItemController extends Controller
         $item->user_id = $request->user()->id;
         $file = $request->file;
 
-
         DB::beginTransaction();
 
         try {

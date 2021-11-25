@@ -38,6 +38,22 @@
                             <div class="max-w-md w-full space-y-8">
                                 <div class="text-center text-white">
                                     <h3 class="mt-6 text-2xl text-yellow-500 font-bold mb-6">
+                                        落とし物を探したい方
+                                    </h3>
+                                    <div>
+                                        <a href="{{ route('items.index') }}" class="w-full flex justify-center bg-yellow-300 hover:bg-gradient-to-l hover:from-purple-500 hover:to-pink-600 text-gray-100 p-4 rounded-full tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500">はじめる</a>
+                                    </div>
+                                    <p class="flex flex-col items-center justify-center mt-10 text-center text-md">
+                                        <a href="#"
+                                            class="hover:text-gray-500 no-underline hover:underline cursor-pointer text-gray-400 transition ease-in duration-300">Atta!って…？</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full w-2/5 xl:w-2/5 p-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none relative z-11">
+                            <div class="max-w-md w-full space-y-8">
+                                <div class="text-center text-white">
+                                    <h3 class="mt-6 text-2xl text-yellow-500 font-bold mb-6">
                                         落とし物を管理する方
                                     </h3>
                                     <div>
