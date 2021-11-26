@@ -27,6 +27,10 @@ Route::post('/register', [RegisterController::class, 'register']);
 // ログイン
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::group(['middleware' => ['api']], function () {
-    Route::apiResource('items', ItemController::class);
-});
+// Route::group(['middleware' => ['api']], function () {
+    Route::apiResource('items', ItemController::class)
+     ->only('index');
+    Route::apiResource('items', ItemController::class)
+     ->only('store')
+     ->middleware('auth');
+// });

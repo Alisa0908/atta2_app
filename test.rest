@@ -39,8 +39,10 @@ content-type: application/json
 ### store
 POST /api/items
 Host: localhost
+Authorization: Bearer 5|oUWtMHTDhANkYpt1aVZWbwsEbR53axRAYj0zrXwg
 Accept: application/json
 Content-Type: multipart/form-data; boundary=storeform
+
 
 --storeform
 Content-Disposition: form-data; name="category_id";
@@ -71,32 +73,44 @@ Content-Type: image/jpeg
 PUT /api/items/1
 Host: localhost
 Accept: application/json
-Content-Type: multipart/form-data; boundary=storeform
+Content-Type: multipart/form-data; boundary=updateform
 
---storeform
+--updateform
 Content-Disposition: form-data; name="category_id";
 Content-Type: TEXT
 
 3
 
---storeform
+--updateform
 Content-Disposition: form-data; name="lost_desc";
 Content-Type: TEXT
 
-バスの中
+"バスの中"
 
---storeform
+--updateform
 Content-Disposition: form-data; name="feature";
 Content-Type: TEXT
 
-灰色
+"灰色"
 
---storeform
-Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg01.jpeg";
+--updateform
+Content-Disposition: form-data; name="file"; filename="/Users/alisa/egg02.jpeg";
 Content-Type: image/jpeg
 
-< /Users/alisa/egg01.jpeg
---storeform
+< /Users/alisa/egg02.jpeg
+--updateform
+
+### update
+PUT /api/items/1
+Host: localhost
+Accept: application/json
+Content-Type: application/json
+
+{
+    "category_id": 3,
+    "lost_desc": "バスの中",
+    "feature": "灰色"
+}
 
 ### destroy
 DELETE /api/items/5 HTTP/1.1

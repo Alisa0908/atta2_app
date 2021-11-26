@@ -41,6 +41,7 @@ class ItemController extends Controller
     public function store(ItemRequest $request)
     {
         $item = new Item($request->all());
+        // $item->user_id = Auth::user()->id;
         $item->user_id = 1;
         $file = $request->file;
 
@@ -67,6 +68,21 @@ class ItemController extends Controller
 
         return $data;
 
+    }
+
+    public function update(ItemRequest $request, Item $item)
+    {
+
+        // $item->user_id = 1; 
+        $item->fill($request->all());
+
+        try {
+            $item->save();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        return $item;
     }
 
     public function destroy(Item $item)

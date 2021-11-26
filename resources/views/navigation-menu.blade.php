@@ -4,10 +4,19 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="/">
+                <div class="flex-shrink-0 flex items-center ">
+                    @guest
+                    <a href="{{ route('items.index') }}" class="font-fantasy">
                         Atta!
                     </a>
+                    <h1 class="font-fantasy">Atta!</h1>
+                    @endguest
+                    @auth
+                    <a href="/dashboard" class="font-fantasy">
+                        Atta!
+                    </a>
+
+                    @endauth
                 </div>
                 <!-- Navigation Links -->
                 @auth

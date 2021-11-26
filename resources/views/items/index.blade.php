@@ -5,7 +5,7 @@
         <x-validation-errors :errors="$errors" />
 
         <div>
-            <h3 class="mb-3 text-gray-400 text-sm">検索条件</h3>
+            <h3 class="mb-3 text-gray-400 text-sm">落とし物検索条件</h3>
             <form action="{{ route('items.index') }}" method="GET" class="rounded pt-3 pb-8 mb-4">
                 <div class="mb-4">
                     <label class="block mb-2" for="category_id">
