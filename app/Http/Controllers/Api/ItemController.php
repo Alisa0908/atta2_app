@@ -41,8 +41,8 @@ class ItemController extends Controller
     public function store(ItemRequest $request)
     {
         $item = new Item($request->all());
-        // $item->user_id = Auth::user()->id;
-        $item->user_id = 1;
+        $item->user_id = $request->user()->id;
+        // $item->user_id = 1;
         $file = $request->file;
 
         DB::beginTransaction();
@@ -67,7 +67,6 @@ class ItemController extends Controller
         $data = [$attachment, $item];
 
         return $data;
-
     }
 
     public function update(ItemRequest $request, Item $item)

@@ -28,9 +28,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 
 // Route::group(['middleware' => ['api']], function () {
-    Route::apiResource('items', ItemController::class)
-     ->only('index');
-    Route::apiResource('items', ItemController::class)
-     ->only('store')
-     ->middleware('auth');
+Route::apiResource('items', ItemController::class)
+    ->only('index');
+Route::apiResource('items', ItemController::class)
+    ->only('show', 'store', 'update', 'destroy')
+    ->middleware('auth:sanctum');
 // });

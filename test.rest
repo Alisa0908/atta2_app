@@ -70,10 +70,17 @@ Content-Type: image/jpeg
 --storeform
 
 ### update
-PUT /api/items/1
+POST /api/items/1
 Host: localhost
+Authorization: Bearer 5|oUWtMHTDhANkYpt1aVZWbwsEbR53axRAYj0zrXwg
 Accept: application/json
 Content-Type: multipart/form-data; boundary=updateform
+
+--updateform
+Content-Disposition: form-data; name="_method";
+Content-Type: TEXT
+
+PUT
 
 --updateform
 Content-Disposition: form-data; name="category_id";
@@ -105,6 +112,7 @@ PUT /api/items/1
 Host: localhost
 Accept: application/json
 Content-Type: application/json
+Authorization: Bearer 5|oUWtMHTDhANkYpt1aVZWbwsEbR53axRAYj0zrXwg
 
 {
     "category_id": 3,
