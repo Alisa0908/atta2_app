@@ -23,14 +23,13 @@ class ItemController extends Controller
 
         $params = $request->query();
         $items = Item::search($params)
-            ->with(['user', 'category'])->paginate(10);
-        $items->appends(compact('feature', 'lost_desc', 'category'));
+            // ->with(['user', 'category'])
+            ->get();
+        // $items->appends(compact('feature', 'lost_desc', 'category'));
 
-        $categories = Category::all();
-
-        $data = [$items, $categories];
-
-        return $data;
+        // return compact('items', 'categories');
+        return $items;
+        // return response()->json($items, 200);
     }
 
     public function show(Item $item)

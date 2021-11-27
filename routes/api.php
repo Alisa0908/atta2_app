@@ -33,4 +33,8 @@ Route::apiResource('items', ItemController::class)
 Route::apiResource('items', ItemController::class)
     ->only('show', 'store', 'update', 'destroy')
     ->middleware('auth:sanctum');
+
+Route::get('categories', function() {
+    return \App\Models\Category::all('id', 'name');
+});
 // });

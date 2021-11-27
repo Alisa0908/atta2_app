@@ -124,3 +124,9 @@ Authorization: Bearer 5|oUWtMHTDhANkYpt1aVZWbwsEbR53axRAYj0zrXwg
 DELETE /api/items/5 HTTP/1.1
 Host: localhost
 Accept: application/json
+
+
+### index
+GET /api/categories HTTP/1.1
+Host: localhost
+Accept: application/json
