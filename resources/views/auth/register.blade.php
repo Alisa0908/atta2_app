@@ -1,7 +1,7 @@
-<x-guest-layout>
+<x-app-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            利用するには以下の情報を入力してください
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -62,9 +62,9 @@
                 </a>
 
                 <x-jet-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('登録する') }}
                 </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>
-</x-guest-layout>
+</x-app-layout>

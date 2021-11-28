@@ -9,7 +9,6 @@
                     <a href="{{ route('items.index') }}" class="font-fantasy">
                         Atta!
                     </a>
-                    <h1 class="font-fantasy">Atta!</h1>
                     @endguest
                     @auth
                     <a href="/dashboard" class="font-fantasy">

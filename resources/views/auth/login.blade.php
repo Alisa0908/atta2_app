@@ -1,5 +1,6 @@
 <x-guest-layout>
     <x-jet-authentication-card>
+        {{-- <div class="h-full flex flex-auto text-white bg-no-repeat bg-cover relative bg-image"> --}}
         <x-slot name="logo">
             <img src="https://icon-pit.com/wp-content/uploads/2019/01/user_login_icon_4394-300x300.png" alt="" class="w-16 md:w-32 lg:w-48">
         </x-slot>
@@ -45,4 +46,5 @@
             </div>
         </form>
     </x-jet-authentication-card>
+    {{-- </div> --}}
 </x-guest-layout>
