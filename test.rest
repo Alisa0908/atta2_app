@@ -130,3 +130,8 @@ Accept: application/json
 GET /api/categories HTTP/1.1
 Host: localhost
 Accept: application/json
+
+### index
+GET /api/users/1 HTTP/1.1
+Host: localhost
+Accept: application/json

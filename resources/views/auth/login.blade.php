@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <img src="https://icon-pit.com/wp-content/uploads/2019/01/user_login_icon_4394-300x300.png" alt="" class="w-16 md:w-32 lg:w-48">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

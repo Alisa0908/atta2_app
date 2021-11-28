@@ -37,4 +37,7 @@ Route::apiResource('items', ItemController::class)
 Route::get('categories', function() {
     return \App\Models\Category::all('id', 'name');
 });
+Route::get('users/{id}', function($id) {
+    return \App\Models\User::find($id,['name', 'tel']);
+});
 // });
