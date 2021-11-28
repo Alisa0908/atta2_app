@@ -28,7 +28,7 @@
                 <div class="h-full flex flex-auto text-white bg-no-repeat bg-cover relative bg-image">
                     <div class="w-4/5 flex flex-auto flex-col md:flex-row items-center justify-center p-10 xl:p-32 overflow-hidden">
                         {{-- <div class="absolute bg-gradient-to-b from-indigo-900 to-black opacity-75 inset-0 z-0"></div> --}}
-                        <div class="absolute bg-yellow-50 opacity-70 inset-0"></div>
+                        <div class="absolute bg-yellow-50 opacity-30 inset-0"></div>
                         <div class="w-4/5 z-10">
                             <div class="text-5xl sm:text-6xl xl:text-8xl font-bold text-yellow-500 leading-tight mb-6">Atta!
                             </div>
