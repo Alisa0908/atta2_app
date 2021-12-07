@@ -11,7 +11,6 @@
                 </div>
             </div>
             <div class="mt-1 mb-3 inline-block">
-                {{ dd($item->image_url) }}
                 <div><img src="{{ $item->image_url }}" alt="" class="h-100 w-100 rounded-full object-cover mr-3"></div>
             </div>
 

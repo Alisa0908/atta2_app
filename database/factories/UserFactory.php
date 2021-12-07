@@ -27,7 +27,7 @@ class UserFactory extends Factory
         $faker = \Faker\Factory::create('ja_JP');
 
         return [
-            'name' => $faker->name(),
+            'name' => $faker->company(),
             'email' => $faker->unique()->safeEmail(),
             'tel' => $faker->phoneNumber(),
             'address' => $faker->prefecture() . $faker->city() . $faker->streetAddress(),

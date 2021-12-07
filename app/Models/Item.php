@@ -57,10 +57,10 @@ class Item extends Model
         }
         if (!empty($params['lost_desc'])) {
             // $query->where('lost_desc', $params['lost_desc']);
-            $query->where('lost_desc', '>=', $params['lost_desc']);
+            $query->where('lost_desc', 'like', '%' . $params['lost_desc'] . '%');
         }
         if (!empty($params['feature'])) {
-            $query->where('feature', $params['feature']);
+            $query->where('feature', 'like', '%' .  $params['feature'] . '%');
         }
         return $query;
     }

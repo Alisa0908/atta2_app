@@ -27,6 +27,17 @@ Route::post('/register', [RegisterController::class, 'register']);
 // ログイン
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::group(['middleware' => ['api']], function () {
-    Route::apiResource('items', ItemController::class);
+// Route::group(['middleware' => ['api']], function () {
+Route::apiResource('items', ItemController::class)
+    ->only('index');
+Route::apiResource('items', ItemController::class)
+    ->only('show', 'store', 'update', 'destroy')
+    ->middleware('auth:sanctum');
+
+Route::get('categories', function() {
+    return \App\Models\Category::all('id', 'name');
 });
+Route::get('users/{id}', function($id) {
+    return \App\Models\User::find($id,['name', 'tel']);
+});
+// });

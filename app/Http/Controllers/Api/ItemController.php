@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ItemRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Attachment;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
@@ -22,14 +23,13 @@ class ItemController extends Controller
 
         $params = $request->query();
         $items = Item::search($params)
-            ->with(['user', 'category'])->paginate(10);
-        $items->appends(compact('feature', 'lost_desc', 'category'));
+            // ->with(['user', 'category'])
+            ->get();
+        // $items->appends(compact('feature', 'lost_desc', 'category'));
 
-        $categories = Category::all();
-
-        $data = [$items, $categories];
-
-        return $data;
+        // return compact('items', 'categories');
+        return $items;
+        // return response()->json($items, 200);
     }
 
     public function show(Item $item)
@@ -41,30 +41,46 @@ class ItemController extends Controller
     {
         $item = new Item($request->all());
         $item->user_id = $request->user()->id;
+        // $item->user_id = 1;
         $file = $request->file;
 
         DB::beginTransaction();
 
         try {
-            // 登録
             $item->save();
             $path = Storage::putFile('items', $file);
 
-            // Attachmentモデルの情報を用意
             $attachment = new Attachment([
                 'item_id' => $item->id,
                 'org_name' => $file->getClientOriginalName(),
                 'name' => basename($path)
             ]);
-            // Attachment保存
+
             $attachment->save();
             DB::commit();
         } catch (\Exception $e) {
-            return back()->withInput()
-                ->withErrors('保存に失敗しました');
+            return $e->getMessage();
             DB::rollback();
         }
 
+        $data = [$attachment, $item];
+
+        return $data;
+    }
+
+    public function update(ItemRequest $request, Item $item)
+    {
+
+        // $item->user_id = 1; 
+        $item->fill($request->all());
+
+        try {
+            $item->save();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+
+        return $item;
     }
 
     public function destroy(Item $item)
